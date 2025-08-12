@@ -21,6 +21,7 @@ ProteinPrep is a small, user-friendly tool to fetch PDB structures, clean them (
 ---
 
 ## Installation
+Make sure to copy/download proteinprep.py and proteinprep_gui.py in your working directory
 
 You can install the necessary dependencies using either Conda (recommended for simplicity) or Pip.
 
@@ -57,7 +58,8 @@ This is the easiest method as it handles the installation of OpenBabel and Pytho
 
     * **Linux (Ubuntu/Debian)**:
         ```bash
-        sudo apt-get update && sudo apt-get install -y openbabel
+        sudo apt-get update
+        sudo apt-get install -y openbabel
         ```
     * **macOS (Homebrew)**:
         ```bash
@@ -95,3 +97,4 @@ Open your terminal in the project directory to run the following commands.
 Download PDB `1a4w`, clean it, add hydrogens, and convert it to PDBQT.
 ```bash
 python3 proteinprep.py 1a4w --auto-protonate --auto-pdbqt
+```
