@@ -30,17 +30,17 @@ ProteinPrep is a small, user-friendly tool to fetch PDB structures, clean them (
 **4.** **Installation**
 Choose one of these approaches.
 
-**Recommended**: Conda (cross-platform, easiest for OpenBabel)
-**Create & activate a conda environment**:
-conda create -n proteinprep python=3.10 -y
-conda activate proteinprep
-**Install OpenBabel + Python packages:**
-conda install -c conda-forge openbabel -y
-pip install -r requirements.txt
-**Simple pip (Linux / Windows)**
-Create a virtualenv (optional but recommended) and activate it.
-Install Python packages:
-python -m pip install -r requirements.txt
+   **1. Recommended: Conda (cross-platform, easiest for OpenBabel)**
+      **Create & activate a conda environment**:
+      conda create -n proteinprep python=3.10 -y
+      conda activate proteinprep
+   **2. Install OpenBabel + Python packages:**
+   conda install -c conda-forge openbabel -y
+   pip install -r requirements.txt
+   **3. Simple pip (Linux / Windows)**
+   Create a virtualenv (optional but recommended) and activate it.
+   Install Python packages:
+   python -m pip install -r requirements.txt
 **Install OpenBabel:**
   **Linux (Ubuntu/Debian):**
   sudo apt-get update
