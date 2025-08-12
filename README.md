@@ -102,3 +102,21 @@ Keep only chains A and B of protein `8fv4`
 ```bash
 python3 proteinprep.py 8fv4 --keep-chains A,B --auto-pdbqt
 ```
+To keep more than two chains, use
+```bash
+python3 proteinprep.py 8fv4 --keep-chains A,B,C --auto-pdbqt
+```
+Use a local PDB file.
+```bash
+python3 proteinprep.py ./8fv4.pdb --auto-protonate
+```
+### GUI (Graphical User Interface)
+Run
+```bash
+python3 proteinprep_gui.py
+```
+1. Enter a PDB ID or choose a local PDB file.
+2. (Optional) Choose a batch file.
+3. Toggle checkboxes for removing waters/heteroatoms, auto-protonate, and auto-pdbqt.
+4. Optionally enter A or A,B for chains to keep.
+5. Click Run and watch the log window.
