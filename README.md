@@ -135,6 +135,7 @@ python3 proteinprep_gui.py
 ## Using ProteinPrep in Google Colab
 Google Colab is a cloud-hosted Jupyter notebook environment with free GPU/CPU that can run Python scripts. 
 Here’s how to run your CLI ProteinPrep tool in Colab efficiently:
+
 Step 1: Upload your script and dependencies
 In your Colab notebook:
 ```bash
