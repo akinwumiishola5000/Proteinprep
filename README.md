@@ -98,3 +98,7 @@ Single PDB (download, clean, protonate, convert it to PDBQT), using the protein 
 ```bash
 python3 proteinprep.py 8fv4 --auto-protonate --auto-pdbqt
 ```
+Keep only chains A and B of protein `8fv4`
+```bash
+python3 proteinprep.py 8fv4 --keep-chains A,B --auto-pdbqt
+```
