@@ -21,7 +21,7 @@ ProteinPrep is a small, user-friendly tool to fetch PDB structures, clean them (
 ---
 
 ## Installation
-Make sure to copy/download proteinprep.py and proteinprep_gui.py in your working directory
+Make sure to copy/download `proteinprep.py` and `proteinprep_gui.py` into your working directory
 
 You can install the necessary dependencies using either Conda (recommended for simplicity) or Pip.
 
@@ -94,7 +94,7 @@ You can run the tool via the command line or the graphical interface.
 Open your terminal in the project directory to run the following commands.
 
 **1. Basic Processing**
-Download PDB `1a4w`, clean it, add hydrogens, and convert it to PDBQT.
+Single PDB (download, clean, protonate, convert it to PDBQT), using the protein `8fv4` as an example:
 ```bash
-python3 proteinprep.py 1a4w --auto-protonate --auto-pdbqt
+python3 proteinprep.py 8fv4 --auto-protonate --auto-pdbqt
 ```
