@@ -144,3 +144,42 @@ In your Colab notebook:
 # Install required Python packages
 !pip install typer requests
 ```
+Step 2: Install OpenBabel in Colab
+OpenBabel is required for protonation and PDBQT conversion steps
+```bash
+!apt-get update -qq
+!apt-get install -y openbabel
+```
+Confirm installation:
+```bash
+!obabel -V
+```
+Step 3: Run the proteinprep.py script
+You can run the script directly using !python3 proteinprep.py commands in a cell.
+```bash
+!python3 proteinprep.py 8fv4 --auto-protonate --auto-pdbqt --keep-chains A,B
+```
+This will:
+Download PDB 8fv4
+Clean it
+Keep only chains A and B
+Protonate with OpenBabel
+Convert to PDBQT format
+Output files will be saved in the Colab session’s current directory (/content).
+
+You can run the script if you don't have a preference for chains.
+```bash
+!python3 proteinprep.py 8fv4 --auto-protonate --auto-pdbqt
+```
+Step 4: Download the output files from Colab
+You can either:
+Use the file browser in Colab (left pane → Files) to manually download files
+OR
+Use the code to download programmatically:
+```bash
+from google.colab import files
+files.download('8FV4_clean.pdb')
+files.download('8FV4_protonated.pdb')
+files.download('8FV4.pdbqt')
+files.download('proteinprep_log.json')
+```
