@@ -131,3 +131,16 @@ python3 proteinprep_gui.py
 3. Toggle checkboxes for removing waters/heteroatoms, auto-protonate, and auto-pdbqt.
 4. Optionally enter A or A,B for chains to keep.
 5. Click Run and watch the log window.
+
+## Using ProteinPrep in Google Colab
+Google Colab is a cloud-hosted Jupyter notebook environment with free GPU/CPU that can run Python scripts. 
+Here’s how to run your CLI ProteinPrep tool in Colab efficiently:
+Step 1: Upload your script and dependencies
+In your Colab notebook:
+```bash
+# upload the proteinprep.py directly to the session filesystem
+!wget https://raw.githubusercontent.com/akinwumiishola5000/Proteinprep/main/proteinprep.py
+
+# Install required Python packages
+!pip install typer requests
+```
