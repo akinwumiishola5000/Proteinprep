@@ -156,7 +156,7 @@ Confirm installation:
 !obabel -V
 ```
 Step 3: Run the proteinprep.py script
-You can run the script directly using !python3 proteinprep.py commands in a cell.
+You can run the script directly using.
 ```bash
 !python3 proteinprep.py 8fv4 --auto-protonate --auto-pdbqt --keep-chains A,B
 ```
