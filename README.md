@@ -89,7 +89,11 @@ Recent versions of PySimpleGUI require installation from a private server. If yo
     ```bash
     python3 -m pip install --upgrade --no-cache-dir --extra-index-url https://pysimplegui.net/pysimplegui/ PySimpleGUI
     ```
-
+3.  **Use python3 instead of python if on Linux or macOS:**:
+    ```bash
+    python3 -m pip uninstall PySimpleGUI
+    python3 -m pip install --force-reinstall --extra-index-url https://PySimpleGUI.net/install PySimpleGUI
+     ```
 ---
 
 ## Usage
