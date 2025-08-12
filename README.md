@@ -80,7 +80,7 @@ Recent versions of PySimpleGUI require installation from a private server. If yo
 
 2.  **Install PySimpleGUI from the correct source**:
     ```bash
-    python3 -m pip install --upgrade --no-cache-dir --extra-index-url [https://pysimplegui.net/pysimplegui/](https://pysimplegui.net/pysimplegui/) PySimpleGUI
+    python3 -m pip install --upgrade --no-cache-dir --extra-index-url https://pysimplegui.net/pysimplegui/ PySimpleGUI
     ```
 
 ---
