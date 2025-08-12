@@ -32,8 +32,9 @@ Choose one of these approaches.
 
    **1. Recommended: Conda (cross-platform, easiest for OpenBabel)**
       **Create & activate a conda environment**:
-      conda create -n proteinprep python=3.10 -y
-      conda activate proteinprep
+       ```bash
+       conda create -n proteinprep python=3.10 -y
+       conda activate proteinprep
    **2. Install OpenBabel + Python packages:**
    conda install -c conda-forge openbabel -y
    pip install -r requirements.txt
