@@ -53,7 +53,14 @@ This is the easiest method as it handles the installation of OpenBabel and Pytho
     ```bash
     pip install -r requirements.txt
     ```
-
+3.  **Install Requests used for HTTP requests to download PDB files**:
+    ```bash
+    pip install requests
+    ```
+4. **Install Typer, for CLI command parsing and options**:
+    ```bash
+    pip install typer[all]
+    ```
 3.  **Install OpenBabel separately**:
 
     * **Linux (Ubuntu/Debian)**:
