@@ -1,8 +1,6 @@
 # ProteinPrep — Fast protein preparation for docking (CLI + GUI)
 
-ProteinPrep is a small, user-friendly tool to fetch PDB structures, clean them (remove water/heteroatoms), optionally keep only selected chains, protonate (add hydrogens) using OpenBabel, and convert to PDBQT for AutoDock Vina. It supports both a command-line interface (CLI) and a graphical user interface (GUI). 🧪
-
-
+ProteinPrep is a small, user-friendly tool that fetches PDB structures, cleans them (removes water/heteroatoms), optionally retains only selected chains, protonates (adds hydrogens) using OpenBabel, and converts to PDBQT for AutoDock Vina. It supports both a command-line interface (CLI) and a graphical user interface (GUI). 🧪        
 
 ---
 
