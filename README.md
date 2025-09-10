@@ -144,7 +144,7 @@ In your Colab notebook:
 !pip install typer requests
 ```
 Step 2: Install OpenBabel in Colab
-OpenBabel is required for protonation and PDBQT conversion steps
+OpenBabel is required for hydrogen addition and PDBQT conversion steps
 ```bash
 !apt-get update -qq
 !apt-get install -y openbabel
