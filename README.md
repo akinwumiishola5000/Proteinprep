@@ -109,11 +109,11 @@ python3 proteinprep.py 8fv4 --auto-add-h  --auto-pdbqt
 ```
 Keep only chains A and B of protein `8fv4`
 ```bash
-python3 proteinprep.py 8fv4 --keep-chains A,B --auto-pdbqt
+python3 proteinprep.py 8fv4 --keep-chains A,B --auto-add-h --auto-pdbqt
 ```
 To keep more than two chains, use
 ```bash
-python3 proteinprep.py 8fv4 --keep-chains A,B,C --auto-pdbqt
+python3 proteinprep.py 8fv4 --keep-chains A,B,C --auto-add-h --auto-pdbqt
 ```
 Use a local PDB file.
 ```bash
