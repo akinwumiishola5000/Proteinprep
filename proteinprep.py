@@ -6,14 +6,15 @@ CLI tool to:
  - fetch PDB by ID (with retries)
  - clean protein: remove waters, remove heteroatoms (optionally keep named ligands)
  - optionally keep only specified chains (A,B,...)
- - optionally add hydrogens (protonate) using OpenBabel CLI
+ - optionally add hydrogens using OpenBabel CLI (note: this only *adds hydrogens*, it does not perform
+   full chemical protonation state prediction — OpenBabel's -h adds hydrogens based on the input)
  - optionally convert to PDBQT using OpenBabel CLI
  - produce a JSON log file with a short report
 
 Usage examples:
-  python3 proteinprep.py 1a4w --auto-protonate --auto-pdbqt
+  python3 proteinprep.py 1a4w --auto-add-h --auto-pdbqt
   python3 proteinprep.py 1a4w --keep-chains A,C --auto-pdbqt
-  python3 proteinprep.py ./my.pdb --out-dir ./out --auto-protonate
+  python3 proteinprep.py ./my.pdb --out-dir ./out --auto-add-h
 
 Author: Ishola Abeeb Akinwumi
 """
@@ -128,6 +129,7 @@ def add_hydrogens_with_obabel(input_file: str, output_file: str) -> dict:
     exe = which("obabel") or which("babel")
     if not exe:
         raise RuntimeError("OpenBabel CLI not found (obabel).")
+    # -h adds hydrogens; this is not a full protonation state predictor
     cmd = [exe, input_file, "-O", output_file, "-h"]
     proc = subprocess.run(cmd, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True)
     return {"cmd": " ".join(cmd), "rc": proc.returncode, "output": proc.stdout}
@@ -149,7 +151,7 @@ def main(
     remove_hetero: bool = typer.Option(True, help="Remove heteroatoms (HETATM)"),
     keep_chains: Optional[str] = typer.Option(None, help="Comma-separated chain IDs to keep, e.g. 'A,C'"),
     keep_ligands: Optional[str] = typer.Option(None, help="Comma-separated 3-letter ligand names to keep, e.g. NAD,HEM"),
-    auto_protonate: bool = typer.Option(False, help="Automatically add hydrogens using OpenBabel"),
+    auto_add_h: bool = typer.Option(False, "--auto-add-h", "--auto-add-hydrogens", help="Automatically add hydrogens using OpenBabel (note: adds hydrogens, not full protonation state prediction)"),
     auto_pdbqt: bool = typer.Option(False, help="Automatically convert to PDBQT using OpenBabel"),
     batch_file: Optional[str] = typer.Option(None, help="Optional: path to a newline-separated file of PDB IDs or paths"),
 ):
@@ -170,13 +172,13 @@ def main(
 
     reports = []
     obabel_ready = obabel_available()
-    if (auto_protonate or auto_pdbqt) and not obabel_ready:
+    if (auto_add_h or auto_pdbqt) and not obabel_ready:
         typer.echo("[WARN] OpenBabel CLI not found. Will try automatic install (may fail).")
         if try_install_openbabel():
             obabel_ready = obabel_available()
             typer.echo("[OK] OpenBabel appears installed.")
         else:
-            typer.echo("[WARN] OpenBabel not installed. Protonation/PDBQT will be skipped.")
+            typer.echo("[WARN] OpenBabel not installed. Hydrogen addition / PDBQT will be skipped.")
 
     for t in targets:
         try:
@@ -199,18 +201,19 @@ def main(
 
             processed = cleaned
 
-            if auto_protonate:
+            if auto_add_h:
                 if obabel_ready:
-                    protonated = os.path.join(out_dir, f"{pdb_label}_protonated.pdb")
-                    typer.echo(f"[OBABEL] Adding hydrogens to {processed} -> {protonated}")
-                    obres = add_hydrogens_with_obabel(processed, protonated)
-                    report["protonate"] = obres
+                    added_h = os.path.join(out_dir, f"{pdb_label}_added_h.pdb")
+                    typer.echo(f"[OBABEL] Adding hydrogens to {processed} -> {added_h}")
+                    obres = add_hydrogens_with_obabel(processed, added_h)
+                    # record under a clear key indicating hydrogen addition (not 'protonation')
+                    report["add_hydrogens"] = obres
                     if obres["rc"] == 0:
-                        processed = protonated
+                        processed = added_h
                     else:
-                        typer.echo("[WARN] OpenBabel returned non-zero exit during protonation.")
+                        typer.echo("[WARN] OpenBabel returned non-zero exit during hydrogen addition.")
                 else:
-                    report["protonate_skipped"] = "OpenBabel not available"
+                    report["add_hydrogens_skipped"] = "OpenBabel not available"
 
             if auto_pdbqt:
                 if obabel_ready:
