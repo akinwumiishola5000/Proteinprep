@@ -10,7 +10,7 @@ ProteinPrep is a small, user-friendly tool that fetches PDB structures, cleans t
 -   **Clean PDB**: Remove water molecules and heteroatoms.
 -   **Select Chains**: Keep only specified chains (e.g., `--keep-chains A,C`).
 -   **Keep Ligands**: Optionally preserve specific heteroatoms/ligands.
--   **Protonate**: Add hydrogens using OpenBabel (`--auto-protonate`).
+-   **Add hydrogen**: Add hydrogens (`--auto-protonate`).
 -   **Convert**: Generate PDBQT files for docking (`--auto-pdbqt`).
 -   **Batch Mode**: Process multiple PDB IDs from a file (`--batch-file`).
 -   **Simple GUI**: An intuitive graphical interface for all features.
@@ -154,7 +154,7 @@ Confirm installation:
 !obabel -V
 ```
 Step 3: Run the proteinprep.py script
-You can run the script directly using.
+You can run the script directly.
 ```bash
 !python3 proteinprep.py 8fv4 --auto-protonate --auto-pdbqt --keep-chains A,B
 ```
@@ -162,7 +162,7 @@ This will:
 Download PDB 8fv4
 Clean it
 Keep only chains A and B
-Protonate with OpenBabel
+Add hydrogen to the protein
 Convert to PDBQT format
 Output files will be saved in the Colab session’s current directory (/content).
 
