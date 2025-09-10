@@ -21,10 +21,10 @@ def run_cmd_in_thread(args, window):
     proc.wait()
     window.write_event_value("-DONE-", proc.returncode)
 
-def build_args(pdb, outdir, remove_waters, remove_hetero, keep_chains, auto_protonate, auto_pdbqt, batch_file):
+def build_args(pdb, outdir, remove_waters, remove_hetero, keep_chains, auto_add_h, auto_pdbqt, batch_file):
     args = [sys.executable, os.path.join(os.path.dirname(__file__), "proteinprep.py")]
     if batch_file:
-        args.extend([ "--batch-file", batch_file ])
+        args.extend(["--batch-file", batch_file])
     args.append(pdb)
     if outdir:
         args.extend(["--out-dir", outdir])
@@ -40,8 +40,8 @@ def build_args(pdb, outdir, remove_waters, remove_hetero, keep_chains, auto_prot
             args.append("--no-remove-hetero")
     if keep_chains:
         args.extend(["--keep-chains", keep_chains])
-    if auto_protonate:
-        args.append("--auto-protonate")
+    if auto_add_h:
+        args.append("--auto-add-h")
     if auto_pdbqt:
         args.append("--auto-pdbqt")
     return args
@@ -54,7 +54,7 @@ def main():
         [sg.Text("Or batch file (one ID/path per line):"), sg.Input(key="-BATCH-"), sg.FileBrowse(file_types=(("Text Files","*.txt"),), target="-BATCH-")],
         [sg.Checkbox("Remove waters", default=True, key="-WATERS-"), sg.Checkbox("Remove heteroatoms", default=True, key="-HETERO-")],
         [sg.Text("Keep chains (comma separated):"), sg.Input(key="-CHAINS-", size=(20,1))],
-        [sg.Checkbox("Auto protonate (requires OpenBabel)", key="-PROT-"), sg.Checkbox("Auto convert to pdbqt (OpenBabel)", key="-PDBQT-")],
+        [sg.Checkbox("Auto add hydrogens (requires OpenBabel)", key="-ADDH-"), sg.Checkbox("Auto convert to pdbqt (OpenBabel)", key="-PDBQT-")],
         [sg.Text("Output folder:"), sg.Input(default_text=".", key="-OUT-"), sg.FolderBrowse(target="-OUT-")],
         [sg.Button("Run"), sg.Button("Exit")],
         [sg.Multiline(size=(100,20), key="-LOG-", autoscroll=True, disabled=True)]
@@ -79,7 +79,7 @@ def main():
                 values["-WATERS-"],
                 values["-HETERO-"],
                 values["-CHAINS-"].strip(),
-                values["-PROT-"],
+                values["-ADDH-"],
                 values["-PDBQT-"],
                 batch if batch else None
             )
@@ -93,13 +93,9 @@ def main():
             rc = values[event]
             window["-LOG-"].print(f"\n[Process finished with return code {rc}]")
             window["Run"].update(disabled=False)
-        elif event == "-OUT-":
-            # append generic output
-            window["-LOG-"].print(values[event])
         # catch streamed lines
         if event == "-OUT-":
             window["-LOG-"].print(values[event])
-        # the run thread writes '-OUT-' and '-DONE-' events
 
     window.close()
 
