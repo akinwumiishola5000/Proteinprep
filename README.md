@@ -10,7 +10,7 @@ ProteinPrep is a small, user-friendly tool that fetches PDB structures, cleans t
 -   **Clean PDB**: Remove water molecules and heteroatoms.
 -   **Select Chains**: Keep only specified chains (e.g., `--keep-chains A,C`).
 -   **Keep Ligands**: Optionally preserve specific heteroatoms/ligands.
--   **Add hydrogen**: Add hydrogens (`--auto-protonate`).
+-   **Add hydrogen**: Add hydrogens (`--auto-add-h`).
 -   **Convert**: Generate PDBQT files for docking (`--auto-pdbqt`).
 -   **Batch Mode**: Process multiple PDB IDs from a file (`--batch-file`).
 -   **Simple GUI**: An intuitive graphical interface for all features.
@@ -105,7 +105,7 @@ Open your terminal in the project directory to run the following commands.
 **1. Basic Processing**
 Single PDB (download, clean, protonate, convert it to PDBQT), using the protein `8fv4` as an example:
 ```bash
-python3 proteinprep.py 8fv4 --auto-protonate --auto-pdbqt
+python3 proteinprep.py 8fv4 --auto-add-h  --auto-pdbqt
 ```
 Keep only chains A and B of protein `8fv4`
 ```bash
@@ -117,7 +117,7 @@ python3 proteinprep.py 8fv4 --keep-chains A,B,C --auto-pdbqt
 ```
 Use a local PDB file.
 ```bash
-python3 proteinprep.py ./8fv4.pdb --auto-protonate
+python3 proteinprep.py ./8fv4.pdb --auto-add-h 
 ```
 ### GUI (Graphical User Interface)
 Run
@@ -156,7 +156,7 @@ Confirm installation:
 Step 3: Run the proteinprep.py script
 You can run the script directly.
 ```bash
-!python3 proteinprep.py 8fv4 --auto-protonate --auto-pdbqt --keep-chains A,B
+!python3 proteinprep.py 8fv4 --auto-add-h --auto-pdbqt --keep-chains A,B
 ```
 This will:
 Download PDB 8fv4
@@ -168,7 +168,7 @@ Output files will be saved in the Colab session’s current directory (/content)
 
 You can run the script if you don't have a preference for chains.
 ```bash
-!python3 proteinprep.py 8fv4 --auto-protonate --auto-pdbqt
+!python3 proteinprep.py 8fv4 --auto-add-h --auto-pdbqt
 ```
 Step 4: Download the output files from Colab
 You can either:
